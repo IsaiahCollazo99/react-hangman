@@ -7,6 +7,7 @@ const Guess = ({handleSubmit}) => {
                 e.preventDefault();
                 handleSubmit(e);
             }}>
+                <p className="guessResponse"></p>
                 <label htmlFor="guessInput">Input a Guess: </label>
                 <input type="text" placeholder="Input a guess" name="guessInput"/>
                 <input type="submit"/>

@@ -8,15 +8,19 @@ class App extends React.Component {
     word: "flowers",
     visualBoard: ""
   }
-
+  
   isGuessInvalid = (guess) => {
-    
+    return !guess || guess.length > 1
   }
 
   handleGuess = (event) => {
-    let guess = event.target.children[1].value;
+    let response = event.target.children[0];
+    let input = event.target.children[2];
+    let guess = input.value;
     if(this.isGuessInvalid(guess)) {
-
+      response.innerText = "Invalid Guess";
+      response.style.color = "red";
+      response.style.fontWeight = "bold";
     }
   }
   
