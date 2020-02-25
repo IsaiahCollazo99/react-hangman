@@ -1,16 +1,20 @@
 import React from 'react';
 import Board from './Components/Board';
 import Guess from './Components/Guess';
+import moves from './assets/moves';
 import './App.css';
 
 class App extends React.Component {
   state = {
     word: "flowers",
-    visualBoard: ""
+    visualBoard: "",
+    guessesRemaining: 6,
+    guessesMade: 0,
+    guesses: []
   }
   
   isGuessInvalid = (guess) => {
-    return !guess || guess.length > 1
+    return !guess || guess.length > 1 || !moves[guess];
   }
 
   handleGuess = (event) => {
@@ -21,6 +25,14 @@ class App extends React.Component {
       response.innerText = "Invalid Guess";
       response.style.color = "red";
       response.style.fontWeight = "bold";
+    } else {
+      let word = this.state;
+      for(let i = 0; i < word.length; i++) {
+        let letter = word[i];
+        if(guess === letter) {
+
+        }
+      }
     }
   }
   
