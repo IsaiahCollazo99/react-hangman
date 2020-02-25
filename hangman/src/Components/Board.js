@@ -1,24 +1,25 @@
 import React from 'react';
+import './../css/Board.css';
 
 class Board extends React.Component {
     render = () => {
         const {visualBoard, word} = this.props;
         let wordDisplay = "";
         let i = 0;
-        while((wordDisplay.length / 2) < word.length) {
+        while(wordDisplay.length < word.length) {
             if(word[i] === " ") {
                 wordDisplay += " ";
             } else {
-                wordDisplay += "_ ";
+                wordDisplay += "_";
             }
             
             i++
         }
 
         return (
-            <div>
+            <div className="board">
                 <img src={visualBoard} alt="Hangman" />
-                {wordDisplay}
+                <p className="word">{wordDisplay}</p>
             </div>
         )
     }
