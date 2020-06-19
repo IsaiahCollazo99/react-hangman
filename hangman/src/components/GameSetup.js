@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../css/GameSetup.css';
 
 const GameSetup = ({ handleSetup }) => {
     const [ category, setCategory ] = useState("choose");
@@ -26,6 +27,7 @@ const GameSetup = ({ handleSetup }) => {
     return (
         <form className="gameSetup" onSubmit={handleSubmit}>
             { error ? <p className="error">{error}</p> : null }
+            <label for="categorySelect">Select a category: </label>
             <select onChange={handleChange} className="categorySelect" required defaultValue="choose">
                 <option value="choose" disabled>Choose a Category</option>
                 <option value="movies">Movies</option>
@@ -36,6 +38,7 @@ const GameSetup = ({ handleSetup }) => {
                 <option value="misc">Misc</option>
             </select>
 
+            <label for="difficultySelect">Select a difficulty: </label>
             <select onChange={handleChange} className="difficultySelect" required defaultValue="choose">
                 <option value="choose" disabled>Choose a Difficulty</option>
                 <option value="veryHard">Very Hard</option>

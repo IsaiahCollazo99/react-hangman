@@ -1,0 +1,20 @@
+.gameSetup {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    align-self: center;
+}
+
+.gameSetup label {
+    margin: 10px 0 5px 0;
+}
+
+.gameSetup input[type="submit"] {
+    margin-top: 10px;
+    width: fit-content;
+    align-self: center;
+}
+
+.gameSetup .error {
+    align-self: center;
+}
