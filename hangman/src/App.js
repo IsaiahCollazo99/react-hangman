@@ -8,10 +8,12 @@ import './App.css';
 const App = () => {
   const [ word, setWord ] = useState("");
   const [ hiddenWord, setHiddenWord ] = useState("");
+  const [ guessesRemaining, setGuessesRemaining ] = useState(6);
 
   const getNewWord = () => {
     let newWord = dictionary[Math.floor(Math.random() * dictionary.length)];
     setWord(newWord);
+
     let underscores = [];
     for(let char of newWord) {
       underscores.push("_");
@@ -39,6 +41,7 @@ const App = () => {
   return (
     <div className="App">
       {word}
+      <p className="guessesRemaining">Guesses Remaining: {guessesRemaining}</p>
       <div className="board">
         {hiddenWord}
       </div>
