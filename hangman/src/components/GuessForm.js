@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import moves from '../util/moves';
 
-const GuessForm = ({ handleGuess }) => {
+const GuessForm = ({ handleGuess, guessesObj }) => {
     const [ guess, setGuess ] = useState("");
     const [ error, setError ] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if(guessesObj[guess.toLowerCase()]) {
+            setError("You already guessed that letter!");
+            return;
+        } 
+        
         if(moves[guess.toLowerCase()]) {
             handleGuess(guess.toLowerCase());
             setError("");

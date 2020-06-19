@@ -6,7 +6,6 @@ const Game = ({ gameOver, isGameOver, answer, returnToSetup }) => {
     const [ guessesRemaining, setGuessesRemaining ] = useState(6);
     const [ guesses, setGuesses ] = useState([]);
     const [ guessesObj, setGuessesObj ] = useState({});
-    const [ error, setError ] = useState("");
 
     const getDisplayWord = () => {
         let underscores = [];
@@ -29,12 +28,6 @@ const Game = ({ gameOver, isGameOver, answer, returnToSetup }) => {
     }, [displayWord, guessesRemaining])
   
     const handleGuess = ( guess ) => {
-      if(guessesObj[guess.toLowerCase()]) {
-        setError("You already guessed that letter!");
-        return;
-      }
-
-      setError("");
       let guessFound = false;
       let newDisplayWord = [...displayWord];
       for(let i = 0; i < answer.length; i ++) {
@@ -62,7 +55,6 @@ const Game = ({ gameOver, isGameOver, answer, returnToSetup }) => {
       setGuesses([]);
       setGuessesObj({});
       setDisplayWord([]);
-      setError("");
     }
   
     useEffect(() => {
@@ -85,9 +77,8 @@ const Game = ({ gameOver, isGameOver, answer, returnToSetup }) => {
               )
             }) : <p className="answer">{answer}</p> }
           </div>
-          { error && !gameOver ? <p className="error">{error}</p> : null}
-  
-          { !gameOver ? <GuessForm handleGuess={handleGuess} /> : <button onClick={handleReplay}>Replay</button> }
+
+          { !gameOver ? <GuessForm handleGuess={handleGuess} guessesObj={guessesObj} /> : <button onClick={handleReplay}>Replay</button> }
           
         </div>
     )
