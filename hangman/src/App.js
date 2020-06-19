@@ -9,12 +9,13 @@ const App = () => {
   const [ gameOver, setGameOver ] = useState(false);
   const [ gameOptions, setGameOptions ] = useState({});
 
-  const handleSetup = ( options ) => {
-    getNewWord();
-  }
+  const getNewWord = ( options = { category: "misc", difficulty: "easy" } ) => {
+    const { category, difficulty } = options;
+    const dictionaryCategory = dictionary[category];
+    const validDictionaryTerms = dictionaryCategory[difficulty];
+    const randomIndex = Math.floor(Math.random() * validDictionaryTerms.length);
 
-  const getNewWord = () => {
-    let newWord = dictionary[Math.floor(Math.random() * dictionary.length)];
+    let newWord = validDictionaryTerms[randomIndex];
     setAnswer(newWord);
   }
 
@@ -30,7 +31,7 @@ const App = () => {
       <div className="App">
         { answer ? 
           <Game gameOver={gameOver} isGameOver={isGameOver} answer={answer} /> :
-          <GameSetup handleSetup={handleSetup} />
+          <GameSetup handleSetup={getNewWord} />
         }
       </div>
   )

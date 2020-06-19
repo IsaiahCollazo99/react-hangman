@@ -16,10 +16,9 @@ const GameSetup = ({ handleSetup }) => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        debugger;
         if(category !== "choose" && difficulty !== "choose") {
             setError("");
-            handleSetup();
+            handleSetup({ category, difficulty });
         } else {
             setError("Please select both a 'Category' and 'Difficulty'");
         }
@@ -31,6 +30,7 @@ const GameSetup = ({ handleSetup }) => {
             <select onChange={handleChange} className="categorySelect" required>
                 <option value="choose" selected disabled>Choose a Category</option>
                 <option value="movies">Movies</option>
+                <option value="games">Video Games</option>
                 <option value="books">Books</option>
                 <option value="tvShows">TV Shows</option>
                 <option value="musicArtists">Music Artists</option>
@@ -39,6 +39,7 @@ const GameSetup = ({ handleSetup }) => {
 
             <select onChange={handleChange} className="difficultySelect" required>
                 <option value="choose" selected disabled>Choose a Difficulty</option>
+                <option value="veryHard">Very Hard</option>
                 <option value="hard">Hard</option>
                 <option value="medium">Medium</option>
                 <option value="easy">Easy</option>
