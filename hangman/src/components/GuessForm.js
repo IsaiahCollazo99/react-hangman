@@ -25,6 +25,7 @@ const GuessForm = ({ handleGuess }) => {
             { error ? <p className="error">{error}</p> : null }
             <form onSubmit={handleSubmit}>
                 <input type="text" maxLength={1} value={guess} onChange={handleChange}/>
+                <input type="submit" value="Guess"/>
             </form>
         </>
     )

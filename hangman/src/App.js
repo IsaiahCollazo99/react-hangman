@@ -7,6 +7,7 @@ const App = () => {
   const [ answer, setAnswer ] = useState("");
   const [ displayWord, setDisplayWord ] = useState([]);
   const [ guessesRemaining, setGuessesRemaining ] = useState(6);
+  const [ gameOver, setGameOver ] = useState(false);
 
   const getNewWord = () => {
     let newWord = dictionary[Math.floor(Math.random() * dictionary.length)];
@@ -26,6 +27,14 @@ const App = () => {
   useEffect(() => {
     getNewWord();
   }, [])
+
+  useEffect(() => {
+    if(displayWord.join("") === answer || !guessesRemaining) {
+      setGameOver(true);
+    } else {
+      setGameOver(false);
+    }
+  }, [displayWord, guessesRemaining])
 
   const handleGuess = ( guess ) => {
     let guessFound = false;
@@ -64,7 +73,7 @@ const App = () => {
         })}
       </div>
 
-      <GuessForm handleGuess={handleGuess} />
+      { !gameOver ? <GuessForm handleGuess={handleGuess} /> : null }
     </div>
   )
 }
