@@ -38,9 +38,9 @@ const App = () => {
 
   const handleGuess = ( guess ) => {
     let guessFound = false;
+    let newDisplayWord = [...displayWord];
     for(let i = 0; i < answer.length; i ++) {
       if(answer[i] === guess) {
-        let newDisplayWord = [...displayWord];
         newDisplayWord[i] = guess;
         setDisplayWord(newDisplayWord);
         guessFound = true;
@@ -61,16 +61,17 @@ const App = () => {
   
   return (
     <div className="App">
-      {answer}
+      { answer }
+      { gameOver ? (!guessesRemaining ? <p className="gameLose">Out of Moves!</p> : <p className="gameWin">You win!</p>) : null }
       <p className="guessesRemaining">Guesses Remaining: {guessesRemaining}</p>
       <div className="board">
-        {displayWord.map(( letter, i ) => {
+        { !gameOver ? displayWord.map(( letter, i ) => {
           return (
             <p className="wordCharacter" key={i}>
               {letter}
             </p>
           )
-        })}
+        }) : <p className="answer">{answer}</p> }
       </div>
 
       { !gameOver ? <GuessForm handleGuess={handleGuess} /> : null }
