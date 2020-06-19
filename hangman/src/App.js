@@ -2,19 +2,21 @@ import React, { useState, useEffect } from 'react';
 import dictionary from './util/dictionary';
 import './App.css';
 import Game from './components/Game';
+import GameSetup from './components/GameSetup';
 
 const App = () => {
   const [ answer, setAnswer ] = useState("");
   const [ gameOver, setGameOver ] = useState(false);
+  const [ gameOptions, setGameOptions ] = useState({});
+
+  const handleSetup = ( options ) => {
+    getNewWord();
+  }
 
   const getNewWord = () => {
     let newWord = dictionary[Math.floor(Math.random() * dictionary.length)];
     setAnswer(newWord);
   }
-
-  useEffect(() => {
-    getNewWord();
-  }, [])
 
   const isGameOver = ( displayWord, answer, guessesRemaining ) => {
     if(displayWord.join("") === answer || !guessesRemaining) {
@@ -27,8 +29,8 @@ const App = () => {
   return (
       <div className="App">
         { answer ? 
-          <Game gameOver={gameOver} setGameOver={setGameOver} isGameOver={isGameOver} answer={answer} /> :
-          <form className="gameSetup">hello</form>
+          <Game gameOver={gameOver} isGameOver={isGameOver} answer={answer} /> :
+          <GameSetup handleSetup={handleSetup} />
         }
       </div>
   )

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import GuessForm from './GuessForm';
-import dictionary from '../util/dictionary';
 
-const Game = ({ gameOver, setGameOver, isGameOver, answer }) => {
+const Game = ({ gameOver, isGameOver, answer }) => {
     const [ displayWord, setDisplayWord ] = useState([]);
     const [ guessesRemaining, setGuessesRemaining ] = useState(6);
 
