@@ -1,0 +1,8 @@
+.board {
+    display: flex;
+    flex-direction: row;
+}
+
+.wordCharacter {
+    margin: 0 5px;
+}
