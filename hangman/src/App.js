@@ -26,11 +26,17 @@ const App = () => {
       setGameOver(false);
     }
   }
+
+  const returnToSetup = () => {
+    setGameOver(false);
+    setAnswer("");
+  }
   
   return (
       <div className="App">
+        {answer}
         { answer ? 
-          <Game gameOver={gameOver} isGameOver={isGameOver} answer={answer} /> :
+          <Game gameOver={gameOver} isGameOver={isGameOver} answer={answer} returnToSetup={returnToSetup} /> :
           <GameSetup handleSetup={getNewWord} />
         }
       </div>
@@ -38,48 +44,3 @@ const App = () => {
 }
 
 export default App;
-
-// class App extends React.Component {
-//   state = {
-//     word: "flowers",
-//     hiddenWord: "",
-//     visualBoard: "",
-//     guessesRemaining: 6,
-//     guessesMade: 0,
-//     guesses: []
-//   }
-  
-//   isGuessInvalid = (guess) => {
-//     return !guess || guess.length > 1 || !moves[guess];
-//   }
-
-//   handleGuess = (event) => {
-//     let response = event.target.children[0];
-//     let input = event.target.children[2];
-//     let guess = input.value;
-//     if(this.isGuessInvalid(guess)) {
-//       response.innerText = "Invalid Guess";
-//       response.style.color = "red";
-//       response.style.fontWeight = "bold";
-//     } else {
-//       let word = this.state;
-//       for(let i = 0; i < word.length; i++) {
-//         let letter = word[i];
-//         if(guess === letter) {
-
-//         }
-//       }
-//     }
-//   }
-  
-//   render = () => {
-//     return (
-//       <div className="App">
-//         <Board word={this.state.word} visualBoard={this.state.visualBoard}/>
-//         <Guess handleSubmit={this.handleGuess}/>
-//       </div>
-//     );
-//   }
-// }
-
-// export default App;

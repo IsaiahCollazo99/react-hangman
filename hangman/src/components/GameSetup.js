@@ -6,7 +6,6 @@ const GameSetup = ({ handleSetup }) => {
     const [ error, setError ] = useState("");
 
     const handleChange = (e) => {
-        debugger;
         if(e.target.className === "categorySelect") {
             setCategory(e.target.value)
         } else {
@@ -27,8 +26,8 @@ const GameSetup = ({ handleSetup }) => {
     return (
         <form className="gameSetup" onSubmit={handleSubmit}>
             { error ? <p className="error">{error}</p> : null }
-            <select onChange={handleChange} className="categorySelect" required>
-                <option value="choose" selected disabled>Choose a Category</option>
+            <select onChange={handleChange} className="categorySelect" required defaultValue="choose">
+                <option value="choose" disabled>Choose a Category</option>
                 <option value="movies">Movies</option>
                 <option value="games">Video Games</option>
                 <option value="books">Books</option>
@@ -37,8 +36,8 @@ const GameSetup = ({ handleSetup }) => {
                 <option value="misc">Misc</option>
             </select>
 
-            <select onChange={handleChange} className="difficultySelect" required>
-                <option value="choose" selected disabled>Choose a Difficulty</option>
+            <select onChange={handleChange} className="difficultySelect" required defaultValue="choose">
+                <option value="choose" disabled>Choose a Difficulty</option>
                 <option value="veryHard">Very Hard</option>
                 <option value="hard">Hard</option>
                 <option value="medium">Medium</option>

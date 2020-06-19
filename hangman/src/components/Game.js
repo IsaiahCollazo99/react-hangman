@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import GuessForm from './GuessForm';
 
-const Game = ({ gameOver, isGameOver, answer }) => {
+const Game = ({ gameOver, isGameOver, answer, returnToSetup }) => {
     const [ displayWord, setDisplayWord ] = useState([]);
     const [ guessesRemaining, setGuessesRemaining ] = useState(6);
+    const [ guesses, setGuesses ] = useState([]);
+    const [ guessesObj, setGuessesObj ] = useState({});
+    const [ error, setError ] = useState("");
 
     const getDisplayWord = () => {
         let underscores = [];
@@ -26,32 +29,53 @@ const Game = ({ gameOver, isGameOver, answer }) => {
     }, [displayWord, guessesRemaining])
   
     const handleGuess = ( guess ) => {
+      if(guessesObj[guess.toLowerCase()]) {
+        setError("You already guessed that letter!");
+        return;
+      }
+
+      setError("");
       let guessFound = false;
       let newDisplayWord = [...displayWord];
       for(let i = 0; i < answer.length; i ++) {
-        if(answer[i] === guess) {
-          newDisplayWord[i] = guess;
+        if(answer[i] === guess.toLowerCase()) {
+          newDisplayWord[i] = guess.toLowerCase();
           setDisplayWord(newDisplayWord);
           guessFound = true;
         }
       }
+
+      let newGuessesObj = {...guessesObj};
+      newGuessesObj[guess.toLowerCase()] = 1;
+      setGuessesObj(newGuessesObj);
+
+      let newGuesses =[...guesses, guess.toLowerCase()];
+      setGuesses(newGuesses);
   
       if(!guessFound) {
         setGuessesRemaining(guessesRemaining - 1);
       }
     }
+
+    const handleReplay = () => {
+      setGuessesRemaining(6);
+      setGuesses([]);
+      setGuessesObj({});
+      setDisplayWord([]);
+      setError("");
+    }
   
-    // useEffect(() => {
-    //   // change board
-    //   return () => {
-    //     setWord("");
-    //   }
-    // }, [word])
+    useEffect(() => {
+      if(!displayWord.length && gameOver) {
+        returnToSetup();
+      }
+    }, [displayWord])
     
     return (
         <div className="game">
           { gameOver ? (!guessesRemaining ? <p className="gameLose">Out of Moves!</p> : <p className="gameWin">You win!</p>) : null }
           <p className="guessesRemaining">Guesses Remaining: {guessesRemaining}</p>
+          <p className="guesses">Guesses: {guesses.join(", ")}</p>
           <div className="board">
             { !gameOver ? displayWord.map(( letter, i ) => {
               return (
@@ -61,8 +85,10 @@ const Game = ({ gameOver, isGameOver, answer }) => {
               )
             }) : <p className="answer">{answer}</p> }
           </div>
+          { error && !gameOver ? <p className="error">{error}</p> : null}
   
-          { !gameOver ? <GuessForm handleGuess={handleGuess} /> : null }
+          { !gameOver ? <GuessForm handleGuess={handleGuess} /> : <button onClick={handleReplay}>Replay</button> }
+          
         </div>
     )
 }
