@@ -1,35 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import dictionary from './util/dictionary';
-// import Board from './Components/Board';
-// import Guess from './Components/Guess';
-// import moves from './assets/moves';
+import GuessForm from './components/GuessForm';
 import './App.css';
 
 const App = () => {
-  const [ word, setWord ] = useState("");
-  const [ hiddenWord, setHiddenWord ] = useState("");
+  const [ answer, setAnswer ] = useState("");
+  const [ displayWord, setDisplayWord ] = useState([]);
   const [ guessesRemaining, setGuessesRemaining ] = useState(6);
 
   const getNewWord = () => {
     let newWord = dictionary[Math.floor(Math.random() * dictionary.length)];
-    setWord(newWord);
+    setAnswer(newWord);
 
     let underscores = [];
     for(let char of newWord) {
-      underscores.push("_");
+      if(char === " ") {
+        underscores.push(" ");
+      } else {
+        underscores.push("_");
+      }
     }
-    setHiddenWord(underscores.map(letter => {
-      return (
-        <p className="wordCharacter">
-          {letter}
-        </p>
-      )
-    }));
+    setDisplayWord(underscores);
   }
 
   useEffect(() => {
     getNewWord();
   }, [])
+
+  const handleGuess = ( guess ) => {
+    let guessFound = false;
+    for(let i = 0; i < answer.length; i ++) {
+      if(answer[i] === guess) {
+        let newDisplayWord = [...displayWord];
+        newDisplayWord[i] = guess;
+        setDisplayWord(newDisplayWord);
+        guessFound = true;
+      }
+    }
+
+    if(!guessFound) {
+      setGuessesRemaining(guessesRemaining - 1);
+    }
+  }
 
   // useEffect(() => {
   //   // change board
@@ -40,11 +52,19 @@ const App = () => {
   
   return (
     <div className="App">
-      {word}
+      {answer}
       <p className="guessesRemaining">Guesses Remaining: {guessesRemaining}</p>
       <div className="board">
-        {hiddenWord}
+        {displayWord.map(( letter, i ) => {
+          return (
+            <p className="wordCharacter" key={i}>
+              {letter}
+            </p>
+          )
+        })}
       </div>
+
+      <GuessForm handleGuess={handleGuess} />
     </div>
   )
 }
