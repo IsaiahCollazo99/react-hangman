@@ -1,0 +1,24 @@
+.game {
+    display: flex;
+    flex-direction: column;
+}
+
+.game form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+}
+
+.game form label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.game input[type="text"] {
+    margin-top: 5px;
+}
+
+.game span {
+    font-weight: bold;
+}
