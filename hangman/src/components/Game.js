@@ -84,7 +84,7 @@ const Game = ({ gameOver, isGameOver, answer, returnToSetup }) => {
                   {letter}
                 </p>
               )
-            }) : <p className="answer">{answer}</p> }
+            }) : <p className="answer"><span>Answer: </span>{answer}</p> }
           </div>
 
           { !gameOver ? <GuessForm handleGuess={handleGuess} guessesObj={guessesObj} /> : <button onClick={handleReplay}>Replay</button> }

@@ -1,11 +1,12 @@
 .game {
     display: flex;
     flex-direction: column;
+    align-self: center;
 }
 
 .game form {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     margin-top: 25px;
 }
 
@@ -16,9 +17,38 @@
 }
 
 .game input[type="text"] {
-    margin-top: 5px;
+    margin-right: 5px;
+    background-color: rgb(146, 146, 146);
+    border: 3px solid #a8334d;
+    font-size: 24px;
+    transition: 0.3s ease-in-out;
+    border-radius: 25px;
+}
+
+.game input[type="text"]:focus {
+    outline: none;
+    border-color: #ff325f;
 }
 
 .game span {
     font-weight: bold;
+}
+
+input[type="submit"], button {
+    width: fit-content;
+    font-size: 20px;
+    border-radius: 25px;
+    background-color: #a8334d;
+    border: 3px solid rgb(146, 146, 146);
+    transition: 0.3s ease-in-out;
+}
+
+input[type="submit"]:hover, button:hover {
+    cursor: pointer;
+    background-color: rgb(146, 146, 146);
+    border-color: #a8334d;
+}
+
+.game button {
+    align-self: center;
 }
