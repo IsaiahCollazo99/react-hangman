@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-self: center;
+    justify-self: center;
 }
 
 .game form {

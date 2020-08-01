@@ -8,6 +8,8 @@ const App = () => {
   const [ answer, setAnswer ] = useState("");
   const [ gameOver, setGameOver ] = useState(false);
   const [ gameOptions, setGameOptions ] = useState({});
+  const [ wins, setWins ] = useState(0);
+  const [ losses, setLosses ] = useState(0);
 
   const getNewWord = ( options = { category: "misc", difficulty: "easy" } ) => {
     const { category, difficulty } = options;
@@ -21,6 +23,8 @@ const App = () => {
 
   const isGameOver = ( displayWord, answer, guessesRemaining ) => {
     if(displayWord.join("") === answer || !guessesRemaining) {
+      if(displayWord.join("") === answer) setWins(wins + 1);
+      if(!guessesRemaining) setLosses(losses + 1);
       setGameOver(true);
     } else {
       setGameOver(false);
@@ -31,10 +35,15 @@ const App = () => {
     setGameOver(false);
     setAnswer("");
   }
+
+  console.log(answer);
   
   return (
       <div className="App">
-        {answer}
+        <div className="stats">
+            <label className="wins">Wins: </label><p>{wins}</p>
+            <label className="losses">Losses: </label><p>{losses}</p>
+        </div>
         { answer ? 
           <Game gameOver={gameOver} isGameOver={isGameOver} answer={answer} returnToSetup={returnToSetup} /> :
           <GameSetup handleSetup={getNewWord} />
