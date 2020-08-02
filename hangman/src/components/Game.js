@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import GuessForm from './GuessForm';
 import '../css/Game.css';
 
-const Game = ({ gameOver, isGameOver, answer, returnToSetup }) => {
+const Game = ({ gameOver, isGameOver, answer, returnToSetup, category, difficulty }) => {
     const [ displayWord, setDisplayWord ] = useState([]);
     const [ guessesRemaining, setGuessesRemaining ] = useState(6);
     const [ guesses, setGuesses ] = useState([]);
@@ -71,10 +71,28 @@ const Game = ({ gameOver, isGameOver, answer, returnToSetup }) => {
         returnToSetup();
       }
     }, [displayWord])
+
+    const getCategoryDisplay = () => {
+      if(category === "games") return "Video Games"
+      else if(category === "tvShows") return "TV Shows"
+      else if(category === "musicArtists") return "Music Artists"
+      else if(category === "misc") return "Miscellaneous"
+      else return category.slice(0, 1).toUpperCase() + category.slice(1);
+    }
+
+    const getDifficultyDisplay = () => {
+      if(difficulty === "veryHard") return "Very Hard"
+      else return difficulty.slice(0, 1).toUpperCase() + difficulty.slice(1);
+    }
+
+    const categoryDisplay = getCategoryDisplay();
+    const difficultyDisplay = getDifficultyDisplay();
     
     return (
         <div className="game">
           { gameOver ? (!guessesRemaining ? <p className="gameLose">Out of Moves!</p> : <p className="gameWin">You win!</p>) : null }
+          <p className="category"><span>Category: </span>{categoryDisplay}</p>
+          <p className="difficulty"><span>Difficulty: </span>{difficultyDisplay}</p>
           <p className="guessesRemaining"><span>Guesses Remaining:</span> <span style={guessesStyle}>{guessesRemaining}</span></p>
           <p className="guesses"><span>Guesses:</span> {guesses.join(", ")}</p>
           <div className="board">

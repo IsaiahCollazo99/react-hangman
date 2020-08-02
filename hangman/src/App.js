@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import dictionary from './util/dictionary';
 import './App.css';
 import Game from './components/Game';
@@ -13,6 +13,7 @@ const App = () => {
 
   const getNewWord = ( options = { category: "misc", difficulty: "easy" } ) => {
     const { category, difficulty } = options;
+    setGameOptions({category, difficulty})
     const dictionaryCategory = dictionary[category];
     const validDictionaryTerms = dictionaryCategory[difficulty];
     const randomIndex = Math.floor(Math.random() * validDictionaryTerms.length);
@@ -37,6 +38,14 @@ const App = () => {
   }
 
   console.log(answer);
+
+  const gameProps = {
+    gameOver,
+    isGameOver,
+    answer,
+    returnToSetup,
+    ...gameOptions
+  }
   
   return (
       <div className="App">
@@ -45,7 +54,7 @@ const App = () => {
             <label className="losses">Losses: </label><p>{losses}</p>
         </div>
         { answer ? 
-          <Game gameOver={gameOver} isGameOver={isGameOver} answer={answer} returnToSetup={returnToSetup} /> :
+          <Game {...gameProps} /> :
           <GameSetup handleSetup={getNewWord} />
         }
       </div>
