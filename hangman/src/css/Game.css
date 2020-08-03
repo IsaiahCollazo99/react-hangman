@@ -5,6 +5,11 @@
     justify-self: center;
 }
 
+.hangmanDisplay {
+    width: 350px;
+    height: 300px;
+}
+
 .game form {
     display: flex;
     flex-direction: row;

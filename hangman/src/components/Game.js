@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import GuessForm from './GuessForm';
 import '../css/Game.css';
+import visualHangman from '../util/visualHangman';
 
 const Game = ({ gameOver, isGameOver, answer, returnToSetup, category, difficulty }) => {
     const [ displayWord, setDisplayWord ] = useState([]);
@@ -85,11 +86,17 @@ const Game = ({ gameOver, isGameOver, answer, returnToSetup, category, difficult
       else return difficulty.slice(0, 1).toUpperCase() + difficulty.slice(1);
     }
 
+    const getHangmanDisplay = () => {
+      return visualHangman[guessesRemaining];
+    }
+
     const categoryDisplay = getCategoryDisplay();
     const difficultyDisplay = getDifficultyDisplay();
+    const hangmanDisplay = getHangmanDisplay();
     
     return (
         <div className="game">
+          <img src={hangmanDisplay} alt={`${guessesRemaining} board`} className="hangmanDisplay" />
           { gameOver ? (!guessesRemaining ? <p className="gameLose">Out of Moves!</p> : <p className="gameWin">You win!</p>) : null }
           <p className="category"><span>Category: </span>{categoryDisplay}</p>
           <p className="difficulty"><span>Difficulty: </span>{difficultyDisplay}</p>
