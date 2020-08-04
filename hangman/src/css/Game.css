@@ -22,18 +22,19 @@
     margin-bottom: 10px;
 }
 
-.game input[type="text"] {
+.game input[type="text"], select {
     margin-right: 5px;
-    background-color: rgb(146, 146, 146);
-    border: 3px solid #a8334d;
+    background-color: rgb(206, 206, 206);
+    border: 3px solid #532cd3;
     font-size: 24px;
     transition: 0.3s ease-in-out;
     border-radius: 25px;
+    padding: 5px 10px;
 }
 
-.game input[type="text"]:focus {
+.game input[type="text"]:focus, select:focus {
     outline: none;
-    border-color: #ff325f;
+    border-color: #3c00ff;
 }
 
 .game span {
@@ -44,15 +45,18 @@ input[type="submit"], button {
     width: fit-content;
     font-size: 20px;
     border-radius: 25px;
-    background-color: #a8334d;
-    border: 3px solid rgb(146, 146, 146);
+    padding: 5px 10px;
+    background-color: #532cd3;
+    border: 1px solid rgb(206, 206, 206);
     transition: 0.3s ease-in-out;
+    color: white;
 }
 
 input[type="submit"]:hover, button:hover {
     cursor: pointer;
-    background-color: rgb(146, 146, 146);
-    border-color: #a8334d;
+    background-color: rgb(206, 206, 206);
+    border-color: #532cd3;
+    color: black;
 }
 
 .game button {

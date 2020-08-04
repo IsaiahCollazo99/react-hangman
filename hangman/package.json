@@ -18,7 +18,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "http://IsaiahCollazo99.github.io/hangman",
+  "homepage": "http://IsaiahCollazo99.github.io/react-hangman",
   "eslintConfig": {
     "extends": "react-app"
   },
